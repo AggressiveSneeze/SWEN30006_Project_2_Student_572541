@@ -12,7 +12,6 @@ require 'open-uri'
 #require 'forecast_io'
 #from https://github.com/darkskyapp/forecast-ruby
 #http://stackoverflow.com/questions/8162444/ruby-regex-extracting-words
-puts "potato"
 # Define the URL
 BASE_URL = 'http://www.bom.gov.au'
 
@@ -39,5 +38,5 @@ locations.each {|city|
   lat=station_details[3].text.match(/\d+[,.]\d+/)[0].to_f
   #long:
   long=station_details[4].text.match(/\d+[,.]\d+/)[0].to_f
-  Location.create({longitude:long, latitude:lat, StationName:station_name})
+  Location.create({longitude:long, latitude:lat, name:station_name})
 }
