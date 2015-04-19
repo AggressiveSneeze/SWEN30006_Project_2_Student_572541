@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  temperature: 1.5
+  apparent_temperature: 1.5
+  weather_reading_id: 
+
+two:
+  temperature: 1.5
+  apparent_temperature: 1.5
+  weather_reading_id: 
