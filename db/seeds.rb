@@ -35,7 +35,7 @@ locations.each {|city|
   station_details=temp_doc.css('.stationdetails td')
   #name
   station_name=city.text
-  #lat
+  #latitude
   lat=station_details[3].text.match(/\d+[,.]\d+/)[0].to_f
   #long:
   long=station_details[4].text.match(/\d+[,.]\d+/)[0].to_f
