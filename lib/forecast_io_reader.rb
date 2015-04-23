@@ -1,10 +1,12 @@
 require 'nokogiri'
 require 'open-uri'
 require 'JSON'
+require 'time'
 
 
 class ForecastIOReader
-  #Where should this stuff go?
+
+
   @@API_KEY = 'cabbc3ce98635516063fe2407c9d8be9'
   @@BASE_URL = 'https://api.forecast.io/forecast'
   @@SOURCE_STRING = 'ForecastIO'
@@ -13,13 +15,17 @@ class ForecastIOReader
   end
 
   def weather_reading(daily_reading)
+
     loc=Location.find(daily_reading.location_id)
     long=loc.longitude
     lat=loc.latitude
     forecast = JSON.parse(open("#{@@BASE_URL}/#{@@API_KEY}/#{lat},#{long}?units=ca&exclude='minutely,hourly,daily,alerts,flags'").read)
 
+    #convert time to am/pm:
+    time=Time.at(forecast['currently']['time'])
+    time=time.strftime('%I:%M%p').downcase
 
-    weather_reading=daily_reading.weather_readings.create({source:@@SOURCE_STRING,time:forecast['currently']['time']})
+    weather_reading=daily_reading.weather_readings.create({source:@@SOURCE_STRING,time:time})
     DewPoint.create({dew_point:forecast['currently']['dewPoint'],weather_reading_id: weather_reading.id})
     #weather_reading.dew_point.create({dew_point:forecast['currently']['dewPoint']})
     temp=forecast['currently']['temperature']

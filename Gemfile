@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Provides a clear syntax for writing and deploying cron jobs.
 gem 'whenever', :require => false
 
+gem 'rufus-scheduler'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
