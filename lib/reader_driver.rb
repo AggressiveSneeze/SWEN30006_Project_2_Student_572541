@@ -1,4 +1,9 @@
+#Provides a method to read in weather data from a particular source (using an instance of that source's reader class)
+#Assumes source_reader.class implements a #weather_reading(daily_reading) method.
+
 module ReaderDriver
+
+  #Drives the source_reader to perform a weather reading.
 
   def self.read(source_reader)
     #generate a string with today's date
@@ -7,19 +12,13 @@ module ReaderDriver
 
     Location.find_each do |location|
       if location.today?
-        #puts 'carrot'
         daily=location.today
       else
-        #puts 'celery'
         daily=location.daily_readings.create({date:today})
       end
       source_reader.weather_reading(daily)
 
     end
-  end
-
-  def self.potato
-    puts 'hee'
   end
 
 end

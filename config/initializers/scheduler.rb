@@ -1,6 +1,9 @@
 #
 # config/initializers/scheduler.rb
 
+#Implements the required functionality of automatically scraping weather data at pre-determined time intervals.
+
+
 require 'rufus-scheduler'
 require 'reader_driver'
 require 'bom_reader'
@@ -12,8 +15,8 @@ require 'forecast_io_reader'
 s = Rufus::Scheduler.singleton
 
 
-#bom_scheduling
 
+#Kicks off the readings from time=0.
 s.in '1s' do
 
   bom_reader=BomReader.new
@@ -23,7 +26,7 @@ s.in '1s' do
 
 end
 
-
+#bom_scheduling
 s.every '10m' do
 
   bom_reader=BomReader.new
@@ -31,7 +34,7 @@ s.every '10m' do
 
 end
 
-#forecast scheduling
+#forecast_io scheduling
 s.every '32m' do
   forecast_reader=ForecastIOReader.new
   ReaderDriver.read(forecast_reader)

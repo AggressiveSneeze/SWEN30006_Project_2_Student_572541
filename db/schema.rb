@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419102043) do
+ActiveRecord::Schema.define(version: 20150423114403) do
 
   create_table "daily_readings", force: :cascade do |t|
     t.date     "date"
